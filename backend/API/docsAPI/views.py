@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, APIView
-from.models import Services,MSDS,TC
-from .serializers import ServiceSerializer, MSDSSerializer, TCSerializer
+from.models import Services,MSDS,TC, SOP
+from .serializers import ServiceSerializer, MSDSSerializer, TCSerializer, SOPSerializer
 from rest_framework import status
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -56,6 +56,13 @@ class TCList(APIView):
         serializers = TCSerializer(tc, many=True)
         return Response(serializers.data)
 
+class SOPList(APIView):
+
+    def get(self, request):
+        sop = SOP.objects.all()
+        serializers = SOPSerializer(sop, many=True)
+        return Response(serializers.data)
+
 
 class MailSend(APIView):
     def post(self, request):
@@ -68,8 +75,8 @@ class MailSend(APIView):
         
         
             email = EmailMessage(
-                'MSDS Files',
-                f"Respected Sir/Madam,\n\nPlease find attachemnt of requested MSDS/TC files.\n{filname}\n\nThanks & Regards,\nEpcorn",
+                'Mail From Cloud Based Documentation Portal-EPCORN',
+                "Greetings of the hour,\n\nYou have received an email with attachments pertaining to MSDS, Technical Sheets & SOP, based on the choice made by the sender, this is an automated email and in case you are not the intended or concerned recipient of the attachments/email, do write back to us for us to verify.\n\nCloud Based Document Portal (www.cbdp.herokuapp.com) is an online portal developed by EPCORN, for ease of collating & sharing relevant documents pertaining to pests and its treatments and available data from different research and publications.\nYou can share your additions and point out errors or corrections if any on epcorn@yahoo.in\n\nThanking You,\n[EPCORN]",
                 'EPCORN <epcorn@yahoo.in>',
                 [data['email']]
                 )

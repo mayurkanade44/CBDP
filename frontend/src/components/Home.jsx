@@ -16,13 +16,12 @@ export const Home = () => {
       {loading ? (
         <Loading />
       ) : (
-        <div>
-          <h1 className="text-center mt-5">MSDS/TC Documents Portal</h1>
-          <div className="position-absolute top-50 start-50 translate-middle">
+        <div className="row d-flex justify-content-center">
+          <div className="col-md-4">
             <table className="table table-hover table-bordered border-dark">
               <thead>
-                <tr style={{ paddingRight: 500 }}>
-                  <th className="text-center">Services</th>
+                <tr>
+                  <th className="text-center">Pest &amp; Service Name</th>
                 </tr>
               </thead>
               <tbody>

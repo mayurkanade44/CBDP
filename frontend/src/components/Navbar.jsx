@@ -36,7 +36,7 @@ export const Navbar = () => {
   return (
     <div>
       <nav
-        className="navbar navbar-expand-lg navbar-light"
+        className="navbar navbar-expand-lg navbar-light mb-5"
         style={{ background: "#D3D3D3" }}
       >
         <div className="container">

@@ -12,6 +12,7 @@ const initialState = {
   docs: [],
   loading: false,
   msg: "",
+  send: false,
 };
 
 export const DataProvider = ({ children }) => {
@@ -19,6 +20,7 @@ export const DataProvider = ({ children }) => {
   const url = "https://cbdpapi.herokuapp.com";
 
   const login = async (username, password) => {
+    dispatch({ type: "LOADING" });
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -92,6 +94,7 @@ export const DataProvider = ({ children }) => {
   };
 
   const sendEmail = async (email, files, names) => {
+    dispatch({ type: "SEND" });
     const token = localStorage.getItem("token");
     const config = {
       headers: {
@@ -126,7 +129,15 @@ export const DataProvider = ({ children }) => {
 
   return (
     <DataContext.Provider
-      value={{ ...state, fetchData, fetchDocuments, login, logout, sendEmail, clearMessage }}
+      value={{
+        ...state,
+        fetchData,
+        fetchDocuments,
+        login,
+        logout,
+        sendEmail,
+        clearMessage,
+      }}
     >
       {children}
     </DataContext.Provider>

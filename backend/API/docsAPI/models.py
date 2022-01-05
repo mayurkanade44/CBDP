@@ -27,3 +27,12 @@ class TC(models.Model):
 
     def __str__(self):
         return self.name
+
+class SOP(models.Model):
+    service = models.ForeignKey(Services, null=True, on_delete=models.CASCADE, related_name='sop')
+    name = models.CharField(max_length=200)
+    file = models.FileField(max_length=None)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import { useDataContext } from "../context/data_context";
 
 export const Login = () => {
-  const { login, error, isAuthenticated } = useDataContext();
+  const { login, error, isAuthenticated, loading } = useDataContext();
   const history = useNavigate();
 
   const [user, setUser] = useState({
@@ -62,7 +62,8 @@ export const Login = () => {
             />
           </div>
           <button type="submit" className="btn btn-primary">
-            Login
+            {loading ? 'loading....' : 'Login' }
+  
           </button>
         </form>
       </div>

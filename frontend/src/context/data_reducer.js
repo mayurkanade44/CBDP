@@ -31,11 +31,17 @@ const data_reducer = (state, action) => {
         error: null,
         docs: action.payload,
       };
+    case "SEND":
+      return {
+        ...state,
+        send: true,
+      };
     case "EMAIL":
       return {
         ...state,
         loading: false,
         error: null,
+        send: false,
         msg: action.payload,
       };
     case "LOGIN_SUCCESS":

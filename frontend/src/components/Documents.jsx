@@ -4,10 +4,12 @@ import { useEffect } from "react/cjs/react.development";
 import { useDataContext } from "../context/data_context";
 import { Alert } from "./Alert";
 import { Loading } from "./Loading";
+import { Table } from "./Table";
 
 export const Documents = () => {
   const { id } = useParams();
-  const { fetchDocuments, docs, sendEmail, msg, loading } = useDataContext();
+  const { fetchDocuments, docs, sendEmail, msg, loading, send } =
+    useDataContext();
 
   const [emailId, setEmailId] = useState("");
   const [files, setFiles] = useState([]);
@@ -40,70 +42,28 @@ export const Documents = () => {
       {loading ? (
         <Loading />
       ) : (
-        <div>
-          <table className="table table-bordered border-dark mt-5">
-            <thead>
-              <tr>
-                <th className="text-center">MSDS</th>
-                <th className="text-center">TC</th>
-              </tr>
-            </thead>
-            <tbody>
-              {docs.length !== 0 &&
-                docs.msds.map((docs) => (
-                  <tr key={docs.id}>
-                    <td>
-                      <div className="row">
-                        <div className="col-md-6">{docs.name}</div>
-                        <div className="col-md-3">
-                          <button className="btn btn-dark">
-                            <a
-                              style={{ textDecoration: "none", color: "white" }}
-                              href={`${docs.file}`}
-                              download
-                            >
-                              Download
-                            </a>
-                          </button>
-                        </div>
-                        <div className="col-md-3">
-                          <button
-                            className="btn btn-primary"
-                            onClick={() => attachingFile(docs.file, docs.name)}
-                          >
-                            Attach
-                          </button>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div className="row">
-                        <div className="col-md-6">{docs.name}</div>
-                        <div className="col-md-3">
-                          <button className="btn btn-dark">
-                            <a
-                              style={{ textDecoration: "none", color: "white" }}
-                              href={`http://127.0.0.1:8000${docs.file}`}
-                              download
-                            >
-                              Download
-                            </a>
-                          </button>
-                        </div>
-                        <div className="col-md-3">
-                          <button
-                            className="btn btn-primary"
-                            onClick={() => attachingFile(docs.file, docs.name)}
-                          >
-                            Attach
-                          </button>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
+        <div className="row">
+          <div className="col-md-4">
+            <Table
+              name="Material Safty Data Sheet"
+              file={docs.msds}
+              attachingFile={attachingFile}
+            />
+          </div>
+          <div className="col-md-4">
+            <Table
+              name="Technical Document"
+              file={docs.tc}
+              attachingFile={attachingFile}
+            />
+          </div>
+          <div className="col-md-4">
+            <Table
+              name="Standard Operating Procedure"
+              file={docs.sop}
+              attachingFile={attachingFile}
+            />
+          </div>
           <div className="row">
             <div className="col-md-6 offset-md-3">
               {msg && <Alert clearFields={clearFields} />}
@@ -125,7 +85,9 @@ export const Documents = () => {
                   value={fileName}
                   disabled
                 />
-                <button className="btn btn-primary mt-3">Send</button>
+                <button className="btn btn-primary my-3">
+                  {send ? "sending...." : "Send"}
+                </button>
               </form>
             </div>
           </div>
