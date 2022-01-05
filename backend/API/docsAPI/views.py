@@ -42,12 +42,12 @@ class ServiceDetail(APIView):
         except:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-class MSDSList(APIView):
+# class MSDSList(APIView):
 
-    def get(self, request):
-        msds = MSDS.objects.all()
-        serializers = MSDSSerializer(msds, many=True)
-        return Response(serializers.data)
+#     def get(self, request):
+#         msds = MSDS.objects.all()
+#         serializers = MSDSSerializer(msds, many=True)
+#         return Response(serializers.data)
 
 # class TCList(APIView):
 
