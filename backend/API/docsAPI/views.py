@@ -49,19 +49,19 @@ class MSDSList(APIView):
         serializers = MSDSSerializer(msds, many=True)
         return Response(serializers.data)
 
-class TCList(APIView):
+# class TCList(APIView):
 
-    def get(self, request):
-        tc = TC.objects.all()
-        serializers = TCSerializer(tc, many=True)
-        return Response(serializers.data)
+#     def get(self, request):
+#         tc = TC.objects.all()
+#         serializers = TCSerializer(tc, many=True)
+#         return Response(serializers.data)
 
-class SOPList(APIView):
+# class SOPList(APIView):
 
-    def get(self, request):
-        sop = SOP.objects.all()
-        serializers = SOPSerializer(sop, many=True)
-        return Response(serializers.data)
+#     def get(self, request):
+#         sop = SOP.objects.all()
+#         serializers = SOPSerializer(sop, many=True)
+#         return Response(serializers.data)
 
 
 class MailSend(APIView):
