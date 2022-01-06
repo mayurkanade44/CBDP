@@ -22,7 +22,7 @@ class MSDS(models.Model):
 class TC(models.Model):
     service = models.ForeignKey(Services, null=True, on_delete=models.CASCADE, related_name='tc')
     name = models.CharField(max_length=200)
-    file = models.FileField(max_length=None)
+    file = models.FileField(max_length=None, upload_to='media/', blank=True)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -31,7 +31,7 @@ class TC(models.Model):
 class SOP(models.Model):
     service = models.ForeignKey(Services, null=True, on_delete=models.CASCADE, related_name='sop')
     name = models.CharField(max_length=200)
-    file = models.FileField(max_length=None)
+    file = models.FileField(max_length=None, upload_to='media/', blank=True)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
