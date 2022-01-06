@@ -82,7 +82,7 @@ class MailSend(APIView):
                 )
             for key, value in files.items():
                 response = requests.get(value)
-                email.attach(key, response.content, mimetype="application/pdf")
+                email.attach(f'{key}.pdf', response.content, mimetype="application/pdf")
             email.send()
             msg = {'msg': 'Email Has Been Sent'}
             return Response(msg, status=status.HTTP_201_CREATED)
